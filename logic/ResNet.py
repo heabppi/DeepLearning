@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+# ResidualBlock (path1)만들기
 class ResidualBlockUp(nn.Module):
   def __init__(self, in_channels, out_channels):
     super(ResidualBlock, self).__init__()
@@ -24,7 +25,8 @@ class ResidualBlockUp(nn.Module):
     output = self.relu(x)
 
     return output
-  
+
+# ResidualBlockDown (path2) 만들기
 class ResidualBlockDown(nn.Module):
   def __init__(self, in_channels, out_channels):
     super(ResidualBlockDown, self).__init__()
@@ -48,7 +50,8 @@ class ResidualBlockDown(nn.Module):
     output = self.relu(x)
 
     return output
-  
+
+# ResidualBlock(path1 + path2)
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
         super(ResidualBlock, self).__init__()
@@ -77,6 +80,7 @@ class ResidualBlock(nn.Module):
       return output
     
 
+# ResNet model 만들기
 class ResNet(nn.Module):            #64           #128          #256          #512
   def __init__(self, in_channels, out_channel1, out_channel2, out_channel3, out_channel4):
     super(ResNet, self).__init__()
@@ -129,6 +133,7 @@ class ResNet(nn.Module):            #64           #128          #256          #5
     x = self.layer6(x)
     return x
   
+# 구현
 import torch
 input_tensor = torch.randn(size=(1,3,224, 224))
 
@@ -136,6 +141,7 @@ model = ResNet(3, 64, 128, 256, 512)
 output = model(input_tensor)
 print(output.shape)
 
+# ResNet 만들기
 class ResNet34(nn.Module):
   def __init__(self, in_channels, out_channel1, out_channel2, out_channel3, out_channel4):
     super(ResNet34, self).__init__()
